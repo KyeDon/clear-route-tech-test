@@ -11,12 +11,11 @@ module.exports = {
       return config;
     },
   }),
-  bastPath: "/docs",
+  basePath: "/docs",
   swcMinify: false,
   staticPageGenerationTimeout: 300,
   images: {
-    domains: [
-    ],
+    domains: [],
     formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
