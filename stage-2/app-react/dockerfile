@@ -1,0 +1,18 @@
+FROM node:18.12.1
+WORKDIR /usr/src/app
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# We only copy the two package files at this stage to ensuring Docker makes use of layer caching.
+COPY package*.json ./
+
+# npm ci rather than npm install to ensure clean install of deps
+RUN npm ci
+
+# Now we can go ahead and add the code, the code can change as many times
+# as you like, as long as the deps don't change anything prior to this will be cached.
+COPY . .
+# Build is unlikely to be cached unless nothing has changed, not sure if there's a way around this!
+RUN npm run build
+
+EXPOSE 3000
+CMD [ "npm", "run", "start" ]
